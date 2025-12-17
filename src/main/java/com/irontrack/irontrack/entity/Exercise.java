@@ -1,4 +1,4 @@
-package com.irontrack.irontrack.entiry;
+package com.irontrack.irontrack.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

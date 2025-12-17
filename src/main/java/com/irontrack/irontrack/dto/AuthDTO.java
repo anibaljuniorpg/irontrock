@@ -1,4 +1,4 @@
-package com.irontrack.irontrack;
+package com.irontrack.irontrack.dto;
 
-public record AuthDTO() {
+public record AuthDTO(String username, String password) {
 }
