@@ -1,5 +1,6 @@
 package com.irontrack.irontrack.entity;
 
+import com.irontrack.irontrack.dto.ExerciseDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,4 +26,7 @@ public class Exercise {
     @ManyToOne
     @JoinColumn(name = "workout_id")
     private Workout workout;
+
+    public Exercise(ExerciseDTO exerciseDTO) {
+    }
 }

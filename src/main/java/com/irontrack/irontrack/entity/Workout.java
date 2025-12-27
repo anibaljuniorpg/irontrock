@@ -1,10 +1,8 @@
 package com.irontrack.irontrack.entity;
 
+import com.irontrack.irontrack.dto.WorkoutDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,15 +14,17 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Data
+@Setter
 public class Workout {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    private String note;
     private String text;
     private String type;
     private String category;
-    private int duration_minutes;
+    private String duration_minutes;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -36,4 +36,7 @@ public class Workout {
 
     private LocalDateTime scheduledDataTime;
     private boolean isCompleted;
+
+
+
 }
