@@ -1,5 +1,6 @@
 package com.irontrack.irontrack.entity;
 
+import com.irontrack.irontrack.dto.ExerciseDTO;
 import com.irontrack.irontrack.dto.WorkoutDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -38,5 +39,17 @@ public class Workout {
     private boolean isCompleted;
 
 
-
+    public Workout(WorkoutDTO workoutDTO) {
+        this.id = workoutDTO.id();
+        this.title = workoutDTO.title();
+        this.note = workoutDTO.note();
+        this.type = workoutDTO.type();
+        this.category = workoutDTO.category();
+        this.exercises = workoutDTO.exercises()
+                .stream()
+                .map(Exercise::new)
+                .toList();
+        this.scheduledDataTime = workoutDTO.scheduledDateTime();
+        this.isCompleted = workoutDTO.isCompleted();
+    }
 }

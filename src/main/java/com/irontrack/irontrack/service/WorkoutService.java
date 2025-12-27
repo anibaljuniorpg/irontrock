@@ -28,7 +28,9 @@ public class WorkoutService {
 
     public WorkoutDTO createWorkout(WorkoutDTO workoutDTO){
         User user = getCurrentUser();
-        return null;
+        Workout workout = new Workout(workoutDTO);
+        workout.setUser(user);
+        return new WorkoutDTO(workoutRepository.save(workout));
     }
 
     public WorkoutDTO updateWorkout(Long id, WorkoutDTO workoutDTO){
@@ -47,6 +49,36 @@ public class WorkoutService {
     }
 
     public String generateReport(){
+        User user = getCurrentUser();
+        List<Workout> workouts = workoutRepository.findByUserAndIsCompletedTrue(user);
+
+        StringBuilder report = new StringBuilder();
+        report.append("Relatorio de treino para ").append(user.getUsername());
+
+        if (workouts.isEmpty()){
+            report.append("\n\nNenhum treino concluido encontrado\n\n");
+        } else {
+            report.append("Total de treinos concluidos: ").append(workouts.size());
+            for (Workout workout : workouts){
+                report.append("\n\nTreino: ").append(workout.getTitle());
+                report.append("\n\nData: ").append(workout.getScheduledDataTime());
+                report.append("\n\nTipo: ").append(workout.getType());
+                report.append("\n\nDuração: ").append(workout.getDuration_minutes());
+                report.append("\n\nExercicios:\n");
+
+                for (Exercise exercise : workout.getExercises()){
+                    report.append("  - ").append(exercise.getName())
+                            .append(": ").append(exercise.getSets())
+                            .append(" series, ").append(exercise.getReps())
+                            .append(" repetições, ").append(exercise.getWight())
+                            .append(" kg\n");
+
+                }
+                report.append("\n");
+            }
+            return report.toString();
+        }
+
         return null;
     }
 
