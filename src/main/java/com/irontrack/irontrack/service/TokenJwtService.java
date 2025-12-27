@@ -127,6 +127,10 @@ public class TokenJwtService {
                 .getBody();
     }
 
+    public Integer extractUserId(String token){
+        return extractClaim(token, claims -> claims.get("userId", Integer.class));
+    }
+
     private Key getSingInKey() {
         byte[] keyBytes = java.util.Base64.getDecoder().decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
