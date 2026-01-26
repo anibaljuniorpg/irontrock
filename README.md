@@ -1,4 +1,4 @@
-# Workout Auth API
+# Irontrock API
 
 API REST desenvolvida em Java com Spring Boot para **autenticação, autorização e cadastro de treinos**, utilizando **JWT** para segurança e controle de acesso.
 
